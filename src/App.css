@@ -12,9 +12,12 @@ section {
     transform: scale(1.2, 1.2);
     cursor: pointer;
 }
+.grow div {
+    background-color: beige;
+}
 .grow .reluctant-grow {
     transition: transform 1s linear;
-    transform-origin: left;
+    /* transform-origin: left; */
 }
 .grow .reluctant-grow.active {
     transform: scale(1.2, 1.2);

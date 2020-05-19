@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSpring, animated } from 'react-spring';
 import './App.css';
 
 function App() {
@@ -11,6 +12,17 @@ function App() {
         reluctantCssClass += ' active';
     }
 
+    const [growSpring, setGrowSpring] = useSpring(
+        () => ({ transform: 'scale(1, 1)' })
+    );
+
+    const handleGrowClick = () => {
+        setReluctantGrow(!reluctantGrow);  // uppdaterar inte state-variabeln direkt
+        setGrowSpring({
+            transform: reluctantGrow ? 'scale(1, 1)' : 'scale(1.2, 1.2)'
+        });
+    }
+
     return (
         <div className="App">
             <header className="App-header">
@@ -18,8 +30,9 @@ function App() {
             </header>
             <main>
                 <section className="grow">
-                    <button onClick={() => setReluctantGrow(!reluctantGrow)}> I will grow </button>
+                    <button onClick={handleGrowClick}> I will grow </button>
                     <div className={reluctantCssClass}> Click button to grow me </div>
+                    <animated.div style={growSpring}> Grown by React Spring </animated.div>
                 </section>
             </main>
         </div>
